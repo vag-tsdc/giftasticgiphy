@@ -10,10 +10,16 @@
 // a loop that appends a button generated buttons from topics ^
 $(document).ready(function () {
 
+    $(document).keypress(function(e) {
+        if(e.which == 13) {
+            e.preventDefault();
+        }
+    });
+
 
     var thingsList = ["okay", "scared", "rihanna", "kandi"];
     for (i = 0; i < thingsList.length; i++) {
-        var button = $("<button type='button' class='btn btn-primary'>");
+        var button = $("<button type='button' class='btn btn-primary' style='margin:3px'>");
         var newButton = button.attr("value", thingsList[i]);
         newButton.html(thingsList[i]);
         $("#buttons-go-here").append(newButton);
@@ -28,54 +34,72 @@ $(document).ready(function () {
         var searchGif = $(this).val();
         console.log(searchGif);
         var queryURL = "http://api.giphy.com/v1/gifs/search?q=" +
-        searchGif + "&api_key=67sPBFexKhzWChD2zLrs9HJI1ciqE6ta";
+            searchGif + "&api_key=67sPBFexKhzWChD2zLrs9HJI1ciqE6ta";
 
         $.ajax({
-            url: queryURL,
-            method: "GET"
-        }).done(function (response) {
+                url: queryURL,
+                method: "GET"
+            })
+            .done(function (response) {
 
-        // $("#gifs-appear-here").empty();
+                // $("#gifs-appear-here").empty();
 
-            console.log(response);
+                console.log(response);
+                for (var i = 0; i < 25; i++) {
+                    var results = response.data[i];
 
-            var results = response.data;
+                    var gifDiv = $("<div class='item'>");
 
-            for (var i = 0; i < results.length; i++) {
+                    var rating = results.rating;
+                    var p = $("<p>").text("Rating: " + rating);
 
-                var gifDiv = $("<div class='item'>");
+                    var stillGif = results.images.fixed_width_still.url;
 
-                var rating = results[i].rating;
-                var p = $("<p>").text("Rating: " + rating);
+                    var gif = $("<img>");
+                    gif.attr("src", stillGif);
+                    gif.attr("data-state", "still");
+                    gif.attr("animated", results.images.fixed_width.url.toString());
+                    gif.attr("still", stillGif);
 
-                var stillGif = results[i].images.fixed_width_still.url;
+                    gifDiv.append(p);
+                    gifDiv.append(gif);
 
-                var gif = $("<img>");
-                gif.attr("src", stillGif);
-                gif.attr("data-state", "still");
-                gif.attr("animated", results[i].images.fixed_width.url.toString());
-                gif.attr("still", stillGif);
-
-                gifDiv.append(p);
-                gifDiv.append(gif);
-
-                $("#gifs-appear-here").prepend(gifDiv);
-            }
-        });
+                    $("#gifs-appear-here").prepend(gifDiv);
+                   
+                }
+                $("#gif-text").html("<h3> You chose... <strong>" + searchGif + "</strong></h3>");
+            });
     });
 
 
     // add form to page that takes valye from a user input box and adds it into your topics array....
-    $("#send-it").on("click", function (event) {
-        event.preventDefault();
-        var inputButton = $("#new-button-input").val().trim();
+    $(".submit").on("click", function () {
 
-        console.log(inputButton);
+        var button = $("<button type='button' class='btn btn-primary' style='margin:3px;'></button>");
+        var searchTerm = $("#newButton").val();
+        button.html(searchTerm);
+        button.attr("value", searchTerm.toString());
+        $("#buttons-go-here").append(button);
+        
+        
 
-        thingsList.push(inputButton);
+            // var button = $("<button type='button' class='btn btn-primary'></button>");
+            // var inputButton = $("#new-button-input").val().trim();
+            // console.log(inputButton);
+            // button.html(inputButton);
+            // button.attr("value", inputButton.toString());
+            
 
-        console.log(thingsList);
+            // $("#buttons-go-here").append(button);
+
+            // thingsList.push(inputButton.toString());
+        
     });
+
+    $("#makeAButton").submit( function(e) {
+        loadAjax();
+        e.returnValue = false;
+      });
     // a function call that takes each topic and remakes the button on the page.
 
     // $("button").on("click", function () {
