@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+    <!-- style -->
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2>
+                    GIF-TASTIC!
+                </h2>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <div id="gif-text">
+                    <h4>
+                        These are the generated`.gif`s....
+                    </h4>
+                </div>
+                <div id="gifs-appear-here">
+
+                </div>
+            </div>
+
+            <div class="col-md-2"></div>
+
+            <div class="col-md-5">
+                <h4>
+                    These are the buttons...
+                </h4>
+                <div id="buttons-go-here">
+                </div>
+
+                <div id="space"></div>
+
+                <div id="submit-button-here">
+                    <form>
+                        <div class="form-group">
+                            <label for="new-button-input">
+                                <h4>Make a Button!
+                                </h4>
+                            </label>
+                            <br>
+                            <input type="text" class="form-control" placeholder="noun, adj., verb, etc..." id="new-button-input">
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="send-it">send it</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- javascript - game script  -->
+    <script src="assets/gif-tastic.js"></script>
+</body>
+
+</html>
